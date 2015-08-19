@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var DB = require("../../config/connection.js")
 var List = require("../models/list")
 
 function error(response, message){
