@@ -2,6 +2,8 @@ var express = require("express");
 var router = express.Router();
 var Task = require("../models/task");
 var List = require("../models/list");
+var DB = require("../../config/connection");
+
 
 function error(response, message){
   response.status(500);
@@ -9,7 +11,10 @@ function error(response, message){
 }
 
 router.get("/tasks", function(req, res){
-  return res.json(Task);
+    Task.findAll({order:"id"}).then(function(tasks){
+        return res.json(tasks);
+    });
+
 });
 
 router.get("/tasks/:id", function(req, res){
