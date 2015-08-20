@@ -31,8 +31,8 @@ router.get("/tasks/:id", function(req, res){
 
 router.put("/tasks/:id", function(req, res){
     Task.findById(req.params.id).then(function(task){
-        task = task.updateAttributes(req.body);
-        return task;
+        task.updateAttributes(req.body);
+        return res.json(task)
     })
   // for(var t = 0; t < Task.length; t++){
   //   if(Task[t].id == req.params.id){
