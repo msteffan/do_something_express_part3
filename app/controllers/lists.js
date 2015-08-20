@@ -57,13 +57,16 @@ router.put("/lists/:id", function(req, res){
 });
 
 router.delete("/lists/:id", function(req, res){
-  for(var l = 0; l < List.length; l++){
-    if(List[l].id == req.params.id){
-      delete List[l];
-      return res.json(List[l]);
-    }
-  }
-  return error(res, "not found");
+    List.findById(req.params.id).then(function(list){
+        list.destroy()
+    })
+  // for(var l = 0; l < List.length; l++){
+  //   if(List[l].id == req.params.id){
+  //     delete List[l];
+  //     return res.json(List[l]);
+  //   }
+  // }
+  // return error(res, "not found");
 });
 
 module.exports = router;
