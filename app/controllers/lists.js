@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var DB = require("../../config/connection")
-var List = DB.models.list
+// fffffuuuuuuu I couldn't get this for.ev.er and it was just a capitalization error -___-
+var List = DB.models.List
 
 function error(response, message){
   response.status(500);
