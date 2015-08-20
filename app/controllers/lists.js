@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var DB = require("../../config/connection")
-// fffffuuuuuuu I couldn't get this for.ev.er and it was just a capitalization error -___-
+// fffff uuuuuuu I couldn't get this for.ev.er and it was just a capitalization error -___-
 var List = DB.models.List
 
 function error(response, message){
@@ -32,21 +32,28 @@ router.post("/lists", function(req, res){
 
 
 router.get("/lists/:id", function(req, res){
-  for(var l = 0; l < List.length; l++){
-    if(List[l].id == req.params.id){
-      return res.json(List[l]);
-    }
-  }
+    List.findAll({where:{id: req.params.id}}).then(function(list){
+        res.json(list)
+    })
+  // for(var l = 0; l < List.length; l++){
+  //   if(List[l].id == req.params.id){
+  //     return res.json(List[l]);
+  //   }
+  // }
 });
 
 router.put("/lists/:id", function(req, res){
-  for(var l = 0; l < List.length; l++){
-    if(List[l].id == req.params.id){
-      List[l] = req.body;
-      return res.json(List[l]);
-    }
-  }
-  return error(res, "not found");
+    List.findById(req.params.id).then(function(list){
+        list = list.updateAttributes(req.body);
+        return list
+    })
+  // for(var l = 0; l < List.length; l++){
+  //   if(List[l].id == req.params.id){
+  //     List[l] = req.body;
+  //     return res.json(List[l]);
+  //   }
+  // }
+  // return error(res, "not found");
 });
 
 router.delete("/lists/:id", function(req, res){
