@@ -11,10 +11,9 @@ function error(response, message){
 }
 
 router.get("/tasks", function(req, res){
-    Task.findAll({order:"id"}).then(function(tasks){
-        return res.json(tasks);
-    });
-
+  Task.findAll({order: "id"}).then(function(tasks){
+    res.json(tasks);
+  });
 });
 
 router.get("/tasks/:id", function(req, res){
